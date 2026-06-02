@@ -89,4 +89,4 @@ Siehe [CONTRIBUTING.md](CONTRIBUTING.md) für Hinweise zur Erweiterung des Skill
 
 ---
 
-Entwickelt von [morefire GmbH](https://www.more-fire.com) — Online Marketing Agentur, Koeln.
+Entwickelt von [Martin Weber](https://www.linkedin.com/in/martinweber-marketing/) für [morefire GmbH](https://www.more-fire.com) — Online Marketing Agentur, Köln.
