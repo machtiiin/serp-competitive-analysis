@@ -172,7 +172,20 @@ Deck-Struktur (Slides):
 14. Section-Divider IV — "Empfehlungen"
 15. Kurzfristig (Pillar-Cards)
 16. Mittelfristig + Strategisch (2-Spalten)
-17. Closing
+17. Closing — Kontakt: m.weber@more-fire.com, kein Skill-Verweis
+
+**Footer-Regel (wichtig):**
+Jede Folie bekommt einen Footer mit dem folgenden Format:
+```html
+<div class="footer">
+  <span>Kundenname | SERP-Wettbewerbsanalyse für "KEYWORD"</span>
+  <img class="logo" src="https://www.more-fire.com/wp-content/uploads/2020/09/morefire-logo-farbig.svg" alt="more-fire" />
+</div>
+```
+Bei Section-Divider-Folien (s-section) das weiße Logo verwenden. "KEYWORD" immer durch das tatsächlich analysierte Keyword ersetzen (z.B. `für "photovoltaikanlage"`, `für "SEO Agentur"`).
+
+**Footer-Abstand (wichtig):**
+Der Footer sitzt `bottom: 56px`, der Content-Bereich hat `padding-bottom: 96px`. Jede Inhalts-Sektion muss mit `padding-bottom: 56px` oder `min-height:0` enden, damit kein Text in den Footer-Bereich hineinragt. Bei Tabellen und langen Listen die Zeilen reduzieren oder Schriftgröße anpassen, bevor die Folie überfüllt wird.
 
 **PDF-Export:**
 ```bash
@@ -214,3 +227,6 @@ Diese Unterscheidung hilft dem Kunden, richtig zu priorisieren.
 - Konkretheit vor Vollständigkeit: Lieber 8 belegte Findings als 20 oberflächliche.
 - Sprache des Reports: richtet sich nach der Keyword-Sprache.
 - Copy-Regel: Keine Em-Dashes (—) im Deck-Text.
+- Umlaut-Regel: Immer korrekte deutsche Umlaute verwenden (ü, ä, ö, ß). Niemals Ersetzungen wie ue, ae, oe, ss.
+- Closing-Folie: Kontakt immer mit m.weber@more-fire.com. Kein Verweis auf den Skill oder das GitHub-Repository auf der Closing-Folie.
+- Footer-Text: Immer `Kundenname | SERP-Wettbewerbsanalyse für "KEYWORD"` mit dem tatsächlichen Keyword in Anführungszeichen.
