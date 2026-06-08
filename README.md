@@ -1,106 +1,61 @@
-# morefire Claude Code Skills
+# SERP Competitive Analysis — Claude Code Skill
 
-Sammlung von Claude Code Skills für SEO- und Wettbewerbsanalysen.
-Output jeweils als PDF-Report im morefire-Design.
-
-Entwickelt von [Martin Weber](https://www.linkedin.com/in/martinweber-marketing/) für [morefire GmbH](https://www.more-fire.com) — Online Marketing Agentur, Köln.
+Vollautomatisierte SERP-Wettbewerbsanalyse für Claude Code. Analysiert Google- und Bing-SERPs für vorgegebene Keywords, scrapet Wettbewerber-Seiten und erstellt einen strukturierten Report als PDF im morefire-Design.
 
 ---
 
-## Enthaltene Skills
+## Was der Skill tut
 
-### 1. SERP Competitive Analysis
+Gegeben eine Marke, eine URL und ein oder mehrere Keywords:
 
-Vollautomatisierte SERP-Wettbewerbsanalyse. Analysiert Google- und Bing-SERPs für vorgegebene Keywords, scrapet Wettbewerber-Seiten und erstellt einen strukturierten Report.
-
-**Was er tut:**
 1. SERP abrufen (organisch + Paid Ads + PAA + Related Searches)
-2. User Story und Persona-Cluster ableiten
-3. Jeden Ranking-Eintrag kategorisieren
-4. Jede Seite analysieren: USP, Themen, Tonalität, Preiskommunikation, Trust, Micro-Copy
+2. User Story und Persona-Cluster aus den SERP-Signalen ableiten
+3. Jeden Ranking-Eintrag kategorisieren (Direktwettbewerber, Hersteller, Publisher, ...)
+4. Jede Seite nach einheitlichem Raster analysieren: USP, Themen, Tonalität, Preiskommunikation, Trust, Micro-Copy, Persona-Abdeckung
 5. Gap-Analyse: Direktvergleich Top-3 und Top-Wettbewerber pro Kategorie vs. eigene Seite
-6. Report als HTML-Deck → PDF
-
-**Installation:**
-```bash
-claude skill install https://github.com/machtiiin/serp-competitive-analysis
-```
-
-**Nutzung:**
-```
-Analysiere die Google-SERPs für "pv anlage kaufen" für enerix (https://enerix.de)
-```
+6. Report als HTML-Deck rendern und als PDF exportieren
 
 ---
 
-### 2. SEO Potential Analysis
+## Installation
 
-Auswertung von ScreamingFrog-Crawl-Daten + Google Search Console als executive-ready PDF.
-Bricht große Crawls auf relevantes Potenzial und To-dos herunter — auch für C-Level verständlich.
-
-**Was er analysiert:**
-- Seiten-Inventar-Funnel: Gecrawlt → Lebendig → Indexierbar → GSC-Sichtbar → Relevant
-- Harte Fehler (4xx/5xx) + Redirect-Chains
-- Technische Struktur: Canonical-Analyse, Crawltiefe, verwaiste Seiten
-- On-Page-Hygiene: fehlende/doppelte Titles und H1s
-- Content-Qualität Q*: Verteilung Thin/Mittel/Rich mit GSC-Cross-Reference
-- GSC Indexierungsstatus: warum Google Seiten nicht indexiert (Coverage-Export)
-- CTR-Optimierungspotenzial: Seiten in Top 10 mit CTR unter Benchmark
-- Cluster-Analyse mit Empfehlung: DEINDEX / OPTIMIEREN / STARK / MONITOR
-- Optional: Hreflang-Analyse für mehrsprachige/Multi-TLD-Sites
-
-**Benötigte Dateien:**
-| Datei | Quelle | Pflicht |
-|---|---|---|
-| `internal_html.csv` | SF → Internal → HTML → Export | Ja |
-| `gsc_pages.csv` | GSC → Leistung → Seiten → Export | Ja |
-| `gsc_coverage.csv` | GSC → Index → Abdeckung → Export | Empfohlen |
-| `gsc_queries.csv` | GSC → Leistung → Suchanfragen → Export | Optional |
-| `sf_hreflang.csv` | SF → Bulk Export → Hreflang → All | Optional |
-
-**Installation:**
 ```bash
+# Claude Code Skill installieren
 claude skill install https://github.com/machtiiin/serp-competitive-analysis
 ```
 
-**Nutzung:**
-```
-Werte den ScreamingFrog-Crawl für morefire.com aus.
-SF: ~/Downloads/internal_html.csv
-GSC: ~/Downloads/gsc_pages.csv
-GSC Coverage: ~/Downloads/gsc_coverage.csv
-```
+Oder manuell: `SKILL.md` in deinen Claude Code Skills-Ordner kopieren.
 
-**Manueller Aufruf:**
-```bash
-python3 seo-potential-analysis/scripts/analyze_seo.py \
-  --sf internal_html.csv \
-  --gsc gsc_pages.csv \
-  --gsc-coverage gsc_coverage.csv \
-  --gsc-queries gsc_queries.csv \
-  --brand "Mustermarke" \
-  --domain "mustermarke.de" \
-  --output ./output/mustermarke-seo-audit.html
-```
+**Voraussetzungen:**
+- Claude Code mit BrightData MCP-Connector (für SERP-Abruf und Seiten-Scraping)
+- Node.js (für PDF-Export via Puppeteer)
+- npm-Package `puppeteer` (einmalig: `npm install puppeteer` im Deck-Ordner)
 
 ---
 
-## PDF-Export (beide Skills)
+## Nutzung
+
+Einfach in Claude Code eingeben:
+
+```
+Analysiere die Google-SERPs für "pv anlage kaufen" für die Marke enerix (https://enerix.de)
+```
+
+Der Skill triggert automatisch und führt durch das Briefing.
+
+---
+
+## PDF-Export
+
+Nach der Analyse wird ein HTML-Deck erstellt. Export als PDF:
 
 ```bash
-# Design-Assets in den Output-Ordner kopieren (einmalig):
-for f in deck-theme.css deck-stage.js tweaks-panel.jsx export-pdf.mjs; do
-  cp templates/$f OUTPUT_VERZEICHNIS/
-done
-
-# Puppeteer installieren (einmalig):
-cd OUTPUT_VERZEICHNIS && npm install puppeteer
-
-# Server starten:
+# 1. Server starten (im Deck-Ordner)
 npx serve -l 4000 .
 
-# PDF exportieren:
-node export-pdf.mjs DATEINAME.html
+# 2. PDF exportieren (in separatem Terminal)
+node templates/export-pdf.mjs mein-deck/mein-deck.html
+# → Output: mein-deck/mein-deck.pdf (1920×1080, Landscape)
 ```
 
 ---
@@ -108,16 +63,30 @@ node export-pdf.mjs DATEINAME.html
 ## Repo-Struktur
 
 ```
-├── SKILL.md                              # SERP Competitive Analysis Skill
-├── README.md
-├── CONTRIBUTING.md
-├── examples/                             # Beispiel-Outputs
-├── references/                           # Analyse-Raster, Design-Referenz
-├── templates/                            # morefire Design-System (CSS, JS, Export)
-└── seo-potential-analysis/               # SEO Potential Analysis Skill
-    ├── SKILL.md
-    ├── scripts/
-    │   └── analyze_seo.py               # Haupt-Analyse-Script (Python, keine Deps)
-    └── references/
-        └── sf-export-guide.md           # Anleitung SF + GSC Export
+serp-competitive-analysis/
+├── SKILL.md                         # Skill-Instruktionen für Claude Code
+├── README.md                        # Dieses Dokument
+├── CONTRIBUTING.md                  # Wie man den Skill weiterentwickelt
+├── references/
+│   └── analysis-raster.md           # Analyse-Raster (Referenz)
+├── templates/
+│   ├── _template.html               # Ausgangspunkt für jedes neue Deck
+│   ├── deck-theme.css               # morefire Design-System
+│   ├── deck-stage.js                # Web Component <deck-stage>
+│   ├── tweaks-panel.jsx             # Live-Farb/Typo-Panel im Browser
+│   ├── export-pdf.mjs               # PDF-Export via Puppeteer
+│   └── ONBOARDING.md               # Design-System Kurzreferenz
+└── examples/
+    ├── enerix-photovoltaikanlage.html  # Beispiel-Output (HTML-Deck)
+    └── enerix-photovoltaikanlage.pdf  # Beispiel-Output (PDF)
 ```
+
+---
+
+## Weiterentwicklung
+
+Siehe [CONTRIBUTING.md](CONTRIBUTING.md) für Hinweise zur Erweiterung des Skills und des Design-Systems.
+
+---
+
+Entwickelt von [Martin Weber](https://www.linkedin.com/in/martinweber-marketing/) für [morefire GmbH](https://www.more-fire.com) — Online Marketing Agentur, Köln.
