@@ -27,7 +27,7 @@
 }
 
 /* ── Base ────────────────────────────────────────────────────────────────── */
-html, body { margin: 0; padding: 0; background: #000; }
+html, body { margin: 0; padding: 0; background: #000; overflow: hidden; height: 100%; }
 deck-stage { background: #000; }
 deck-stage > section {
   font-family: 'Heebo', system-ui, sans-serif;
@@ -154,7 +154,7 @@ ul.clean li .lab { flex: 1; }
   box-sizing: border-box;
 }
 .pillar-card .tag {
-  font-size: 24px;
+  font-size: 20px;
   color: var(--c-red);
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -184,7 +184,7 @@ ul.clean li .lab { flex: 1; }
   grid-template-columns: 40px 1fr 100px;
   gap: 18px;
   align-items: center;
-  padding: 9px 0;
+  padding: 14px 0;
   border-bottom: 1px solid var(--c-ink-15);
 }
 .check-row .ico          { width: 30px; height: 30px; }
